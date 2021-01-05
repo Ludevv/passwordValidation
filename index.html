@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testy</title>
+    <style>
+        body {
+            margin: 10px 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            display: inline-block;
+            font-family: arial;
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        input {
+            border-radius: 5px;
+            display: inline-block;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        div {
+            font-family: arial;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Wprowadź hasło:</h2>
+    <input>
+    <div></div>
+
+    <script>
+        const input = document.querySelector('input');
+        const div = document.querySelector('div');
+
+
+        const checkNumber = function (text) {
+            for (let i = 0; i < text.length; i++) {
+                const integer = parseInt(text[i], 10)
+                if (integer) return true
+            }
+        }
+
+
+        const checkBig = function (text) {
+            inputText = text.replace(/[0-9]/g, '');
+            for (let i = 0; i < inputText.length; i++) {
+                if (inputText[i] === inputText[i].toUpperCase()) return true
+            }
+        }
+
+
+        const checkLength = function (text) {
+            if (text.length >= 8) return true
+        }
+
+
+        input.addEventListener('input', (e) => {
+            const enterText = input.value;
+
+            if (checkLength(enterText) && checkBig(enterText) && checkNumber(enterText)) {
+                input.style.border = 'green solid 2px';
+                div.textContent = '';
+            } else {
+                input.style.border = 'red solid 2px';
+                div.textContent =
+                    'Hasło musi zawierać conajmniej 8 znaków, dużą literę, cyfrę i znak specjalny!';
+                div.style.color = 'red';
+            }
+        })
+    </script>
+</body>
+
+</html>
